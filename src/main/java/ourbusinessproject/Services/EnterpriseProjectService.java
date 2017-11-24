@@ -8,12 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class EnterpriseProjectService {
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    @PersistenceContext
     private EntityManager entityManager;
 
     public EnterpriseProjectService() {
@@ -49,7 +51,7 @@ public class EnterpriseProjectService {
     }
 
     public List<Project> findAllProjects() {
-        Query query = entityManager.createQuery("SELECT p FROM Project p ORDER BY p.title");
+        Query query = entityManager.createQuery("SELECT p FROM Project p join fetch p.enterprise ORDER BY p.title");
         return query.getResultList();
     }
 

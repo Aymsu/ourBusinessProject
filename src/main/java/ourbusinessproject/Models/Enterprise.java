@@ -7,7 +7,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,13 +35,13 @@ public class Enterprise {
     @Email
     private String contactEmail;
 
-    public void setProjects(Set<Project> projects) {
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
 
-    @OneToMany
     @JsonIgnore
-    private Set<Project> projects;
+    @OneToMany
+    private List<Project> projects;
 
     public Enterprise() {
     }
@@ -91,12 +93,12 @@ public class Enterprise {
         this.id = id;
     }
 
-    public Set<Project> getProjects() {
+    public List<Project> getProjects() {
         return projects;
     }
 
     public void addProject(Project project) {
-        if(this.projects == null) projects = new HashSet<>();
+        if(this.projects == null) projects = new ArrayList<>();
         this.projects.add(project);
     }
 }

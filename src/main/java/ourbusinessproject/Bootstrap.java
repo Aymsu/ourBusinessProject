@@ -27,6 +27,7 @@ public class Bootstrap {
     public void init() {
         try{
             this.getInitializationService().initProjects();
+            this.getInitializationService().initPartnerships();
         }catch (Exception e){
         }
     }
